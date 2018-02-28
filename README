@@ -1,0 +1,348 @@
+
+                         Virus CHECK+ version 1.0 áeta
+                             (c)1998 by ZyáeràY
+                             zyberay@mailcity.com
+
+
+   
+                           *** TABLE OF CONTENTS ***
+
+
+ AUTHENTICITY           ...................................... I
+ FILE LIST              ...................................... II
+ SYSTEM REQUIREMENTS    ...................................... III
+
+ FEATURES               ...................................... IV
+
+ i.   - What's New 
+ ii.  - Virus List
+
+ OVERVIEW               ...................................... V
+ OPERATION              ...................................... VI
+
+ i.    - How to use Virus Check+
+ ii.   - Command Line Parameters
+ iii.  - Samples of frequently-used options
+
+ 
+ VIRUS REMOVAL          ...................................... VII
+
+ i.    - Files
+ ii.   - MBR 
+ iii.  - Boot
+ iv.   - Memory
+
+ DISCLAIMER              .................................... VIII
+ KNOWN BUGS              .................................... IX
+
+ FUTURE ENHANCEMENTS     ..................................... X
+ ACKNOWLEDMENTS & GREETS ..................................... XI
+
+
+ ---------------------------------------------------------------------------
+
+
+
+ I. AUTHENTICITY
+
+       Virus Check+ performs a self-test everytime it is executed.
+ If the test fails, then the file has been modified in any way. A 
+ warning will be displayed and then it will try to restore itself
+ to its original clean state if possible and still continue  to 
+ check for viruses after confirmation from the user has been made.
+ It will also checks for the presence of a companion file that has
+ the same name but an extension of .COM. If it finds one, then the
+ file is automatically deleted.
+
+
+ II. FILE LIST
+
+ This Version of Virus Check+ Package contains the following files:
+
+                 NAME        SIZE (Bytes)      Date
+
+                 VCHECK.EXE  41,545            01/20/99
+                 VCHECK.DOC  13660             01/20/99
+
+       If your copy of VCHECK.EXE differs from that of  what is
+ listed above then it may have been modified. Discontinue using
+ by removing it from your system then obtain a clean copy.
+
+
+ III. SYSTEM REQUIREMENTS
+
+     - IBM PC/AT , 80286 or higher processor 
+     - 256k of RAM
+     - DOS 3.3 or higher
+     - 70kb of disk space
+
+ IV. FEATURES
+
+ i. What's New
+
+      - This version of Virus Check+ detects 250 most common ,old & new and
+        "in the wild" Viruses and cleans 235 of them. Some of the viruses
+        simply damage and overwrite the files they infect. So this makes
+        it impossible to restore or remove the virus.
+
+        ( See the Virus List on section 2)
+
+      - Fast memory scanning and virus deactivations
+
+      - MBR Disinfection 
+
+      - Includes 4 additional files:
+
+        Filename                   Description
+
+        RECONST.COM                .PAS and .ASM files reconstructor
+        ANTI-DH2.EXE               DieHard specific stand alone scanner
+                                   and remover.
+        ANTIDITH.EXE               Al-dith specific stand alone scanner
+                                   and remover.
+        ANTITROY.EXE               Trojan Horse scanner.
+
+
+ ii. Virus List
+
+        To view the virus list type VCheck /List at the command prompt. 
+
+
+ V. OVERVIEW
+
+        Virus Check+ is a virus detection and identification tool used for
+ the IBM PC and compatible computers. It will search a PC for known computer
+ viruses in memory, boot sector, partition table and the files.
+
+        Virus Check+ will search the system using standard search strings or
+ patterns that are unique to each computer virus, and then  reporting their
+ presence if found. This method  works only for viruses that are known to
+ Virus Check+ and also viruses that are DOS based.
+
+        Virus Check+ scans diskette or entire systems for nearly all computer
+ virus infections. It will identify the virus infecting the system, and tell
+ what area of the system (memory, boot sector, file, partition table )  the
+ virus was found. Other variants of the most common viruses like Jerusalem,
+ Stoned, Vienna are 50% inaccurately but still can  be  identified by Virus
+ Check+ as viruses belonging to the same family.
+
+
+ VI. OPERATION
+
+
+ i. How to use Virus Check+
+
+       Virus Check+ will check each area or file on the designated
+ drive that could be infected with a virus.  If a virus is found, 
+ a window is displayed telling the name of the infected object
+ with name of the identified virus and the area in which it was found.
+       When Virus Check+ is executed without any parameters, it
+ defaults to proceed  Memory Scan -> Self-Check -> Scan files in the
+ current directory of the current drive.  Virus Check+ treats  all
+ executable files with the following extensions .EXE, .COM, .SYS,
+ .BIN, .OV?, .DRV and it will scan these files by default.
+
+
+ ii. Command Line Parameters
+
+ Usage:  VCHECK [Drive:][Path][Filename] [/Options...]
+
+ Command Line Options:
+ /? or /H  Ä  This help
+ /ALL      Ä  Scan all file types.
+ /BOOT     Ä  Scan boot areas only.
+ /UMB      Ä  Scan Uppper Memory.
+ /NO<xxxx>
+     BOOT  Ä  Do not scan boot areas.
+     BEEP  Ä  Do not beep when a virus is detected.
+     SUB   Ä  Do not recurse subdirectories .
+     MEM   Ä  Skip memory scanning.
+ /EICAR    Ä  Drops the virus test file.
+ /LIST     Ä  List of viruses that ûCheck+ detects/cleans.
+
+  - Virus Check+ is not case sensitive and will accept and recognize
+    parameters in both lower and upper cases.
+
+
+ iii.  - Samples of frequently-used options
+
+
+ 1. VCheck                                     - scans all executable
+                                                 files starting from
+                                                 the current directory
+                                                 to all is lower sub-
+                                                 directories
+                                                
+ 2. VCheck C:                                  - scans all executable
+                                                 files in the current
+                                                 directory of drive C:
+                                                 down to its lower sub-
+                                                 directories.
+
+ 3. VCheck C:\                                 - scans all executable
+                                                 files in the drive
+                                                 starting from the root
+                                                 directory. 
+
+    VCheck A:\                                 - scans all executable
+                                                 files in drive A:
+                                                 starting from the root
+                                                 directory, then prompts
+                                                 the user for another disk.
+
+ 4. VCheck /ALL                                - Checks all files of any
+                                                 extension in the current
+                                                 directory of the current
+                                                 drive.
+
+ 5. VCheck C:\ /ALL                            - Same as above, but it
+                                                 starts from the root
+                                                 directory.
+
+    VCheck A:\ /ALL                            - Same as above and prompts
+                                                 the user to insert another
+                                                 disk.
+
+ 6. VCheck C: /ALL /NOSUB                      - Same as above, but does
+                                                 not process its subdirec
+                                                 tories.
+
+ 7. VCheck C: /ALL /NOBOOT                     - Same as no. 5, but skip
+                                                 scanning of boot areas
+
+    VCheck A:\ /ALL /NOBOOT                    - Same as above, then prompts
+                                                 the user to insert another
+                                                 disk.
+
+    VCheck C:\ /ALL /NOBOOT /NOSUB             - guess what!!!!!!!!!!
+
+
+ 8. VCheck C: /BOOT                            - Scans only the MBR
+                                                 and BOOT SECTOR of
+                                                 disk C: then exits.
+
+    VCheck A: /BOOT                            - Scans only the BOOT SECTOR
+                                                 of disk A:, then prompts
+                                                 for another disk.
+
+    VCheck A: /BOOT /NOMEM                     - Same as above, but bypasses
+                                                 memory scan.
+
+ VII.  Virus Removal
+
+      i. FILE
+
+           File-based viruses are the hardest ones to disinfect. Because
+      most of these viruses may employ polymorphism in the code and thus
+      making their presence harder to detect. The most common way to
+      remove File-based viruses is to restore from backup.
+
+    ii.  MBR
+
+           Most viruses of these type are the easiest to clean. As the
+      famous FDISK /MBR will suffice. But latter may fail sometimes as
+      some viruses like the Monkey virus overwrites the partition table
+      with its own code, thus making the disk invisible if you try to
+      boot from a floppy disk, because DOS doesn't recognize the drive.
+
+    iii. BOOT
+
+           These type of viruses are the easiest to  clean by simply 
+     SYSing the disk. For floppy disks this will always be sufficient
+     to owerwrite the virus. But in most cases the virus will also
+     infect the partition table in hard disks. This group of viruses
+     are the common viruses around. Some of these viruses
+     will also infect files (Multipartite) thus making them a bit
+     harder to discover by the user, though.
+
+    iv.  MEMORY
+
+           Most of those type of viruses mentioned are memory resident.
+     Which means they stay in the system memory while infecting the system
+     in the background, affecting run-time operations etc. Viruses of this
+     type must be removed from memory in order to properly disinfect the
+     system, such as booting from a virus free floppy disk, then proceeding
+     with virus scanning. However, in the case of VCheck+ which can safely
+     remove/disable the virus in memory, so it is okey to continue scanning
+     without the risk that any viral activity might occur.
+
+
+ VIII. DISCLAIMER
+
+      Virus Check+ is freeware, therefore it disclaims all warranties and
+ guarranties. Virus Check+ only scans and cleans viruses that are known
+ to it so it is not responsible for program corruptions due to other viruses
+ lurking in your system :(. If you suspect you have a virus that is unknown
+ to Virus Check+ then you must scan your system using other advanced foreign
+ anti-virus products such as F-Prot, AVP and TBAV.
+      Take it from me, they are among the best. And better yet send a copy
+ of the virus to the address below. I would gladly appreciate it. Then in
+ return, I will send you an update copy of VCheck with the disinfection of
+ the virus you sent.
+
+ R. Lim
+ Western Mindanao State University
+ Zamboanga City, Philippines
+ 7000
+
+ or send it to my email shown at the top page this document. 
+
+ IX. KNOWN BUGS
+ 
+     - VCheck will not able to restore itself after infection from a full
+       stealth or tunneling virus, though. Also, it is impossible for VCheck
+       to restore itself if the disk is other than write enabled. Hence, it
+       is not Hacker proof nor Virus proof.
+
+     - Behaves differently if ran under a Win95 DOS windows. To resolve,
+       always run full screen.
+
+     - "Illegal Operation" message if run under Win98. This has to do with
+       the 32Bit disk access. I also experienced this on WinNT4, with the
+       message "Not using 32bit disk access", but still resumes after
+       ignoring the message.
+
+
+ X. FUTURE ENHANCEMENTS
+
+       Future enhancements include:
+
+    -  WordMacro, Excel Virus detection and removal.
+    -  Win 3.xx and Win9x virus detection and removal.
+    -  Windows 95/98 interfacing.
+
+
+ XI. ACKNOWLEDMENTS & GREETS
+
+     
+    Greetings to :
+                   
+                  þ  YeZ, $cenarios and all the guys at NetLink   
+
+                  þ  Sorojax, ZeroCool, CyberJam , As3, Lubats, BitSucker
+                     ,Frank and all the BROWSERS (4TH yr. notorious 
+                     COMPUTER ENG'G of WMSU) of generation 2000.
+                     
+                  þ  Zoom23 
+                     PVW webring http://members.xoom./Zoom23/
+
+                  þ  PsK 
+                     HEXFILES http://www.geocities.com/Tokyo/Shrine/2073/
+                  
+                  þ  Engr. Proculo Francisco
+
+      Thanx to: 
+             
+                  þ  Surfnet Company
+
+                  þ  Ronnie Pineda
+                     Philippine AntiVirus WebSite 
+                     http://members.tripod.com/phil_av
+                     phil_av@yahoo.com
+
+                  þ  As3, Frank for distributing VCheck+ 
+                     CyberJam for the monitor :)
+
+
+      Best viewed using Notepad....  Hehehehehe :)
+
