@@ -1,0 +1,120 @@
+#include <dos.h>
+#include <stdio.h>
+#include <alloc.h>
+#include <string.h>
+
+static unsigned (far *XMSDriver)();
+
+unsigned InitXMS() {
+  asm {
+     mov   ax, 4300h
+     int   2fh
+     cmp   al, 80h
+     jne   NoDriver
+     push  es
+     mov   ax, 4310h
+     int   2fh
+     mov   word ptr [XMSDriver]  ,  bx
+     mov   word ptr [XMSDriver+2], es
+     pop   es
+  }
+  return 1;
+  NoDriver:  return 0;
+}
+
+unsigned XMSVersion() {
+  asm xor ah, ah
+  return XMSDriver();
+}
+
+unsigned GetXMSFree() {
+  asm mov  ah, 8
+  return   XMSDriver();
+}
+
+unsigned AllocXMS(unsigned blks) {
+  asm {
+     mov  ah, 9
+     mov  dx, word ptr blks
+  }
+  if (XMSDriver()) return _DX;
+  else return 0;
+}
+
+unsigned FreeXMS(unsigned h) {
+   asm {
+      mov  ah, 0AH
+      mov  dx, word ptr h
+   }
+   return XMSDriver();
+}
+
+typedef struct XMSMoveStruc {
+   unsigned long length;
+   unsigned srchandle;
+   unsigned long srcoff;
+   unsigned desthandle;
+   unsigned long destoff;
+};
+
+XMSMoveStruc block;
+
+unsigned  StoreXMS(unsigned handle,char far *src,unsigned long off,unsigned long n) {
+  block.length=n;
+  block.srchandle=0;
+  block.srcoff=(unsigned long)src;
+  block.desthandle=handle;
+  block.destoff=off;
+  asm {
+     mov   ah, 0bh
+     mov   si, offset block
+  }
+  XMSDriver();
+//  asm pop  ds
+  return _AX;
+}
+
+unsigned  LoadXMS(unsigned handle,char far *dest,unsigned long soff,unsigned long n) {
+  block.length=n;
+  block.srchandle=handle;
+  block.srcoff=soff;
+  block.desthandle=0;
+  block.destoff= (unsigned long)dest;
+  asm {
+     mov   ah, 0bh
+     mov   si, offset block
+  }
+  XMSDriver();
+  return _AX;
+}
+/*
+void main() {
+  if (!InitXMS()) {
+     printf("\nXMS not detected.");
+     return;
+   }
+   else printf("\nXMS detected");
+   printf("\n%x.%.2x",(XMSVersion()>>8),(XMSVersion()&0xff));
+   printf("\n%d KB",GetXMSFree());
+   unsigned handle;
+   handle=AllocXMS(64);
+   if (!handle) printf("\nAllocation error!");
+   else printf("\nAllocation success., handle = %4x",handle);
+   char far *p,far *q;
+   p=(char far*)farmalloc(64000);
+   _fmemset(p,55,64000);
+   q=(char far*)farmalloc(64000);
+   if (StoreXMS(handle,p,0,64000)) printf("\nDOS to XMS transder OK.");
+   else ("\nDOS to XMS transfer error.");
+   if (LoadXMS(handle,q,0,64000)) printf("\nXMS to DOS transder OK.");
+   else ("\nXMS to DOS transfer error.");
+   for (unsigned ip=0;ip<64000;ip++)
+     if (p[ip]!=q[ip]) {
+       printf("\nError in data transer. %u",ip);
+       break;
+     }
+   if (!_fmemcmp(p,q,64000)) printf("\nData transfer O.K.");
+   else printf("\nError");
+   FreeXMS(handle);
+}
+  */
