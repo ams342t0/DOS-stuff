@@ -1,6 +1,6 @@
 
-                         Virus CHECK+ version 1.0 áeta
-                             (c)1998 by ZyáeràY
+                         Virus CHECK+ version 1.0 Ã¡eta
+                             (c)1998 by ZyÃ¡erÃ Y
                              zyberay@mailcity.com
 
 
@@ -148,17 +148,17 @@
  Usage:  VCHECK [Drive:][Path][Filename] [/Options...]
 
  Command Line Options:
- /? or /H  Ä  This help
- /ALL      Ä  Scan all file types.
- /BOOT     Ä  Scan boot areas only.
- /UMB      Ä  Scan Uppper Memory.
+ /? or /H  Ã„  This help
+ /ALL      Ã„  Scan all file types.
+ /BOOT     Ã„  Scan boot areas only.
+ /UMB      Ã„  Scan Uppper Memory.
  /NO<xxxx>
-     BOOT  Ä  Do not scan boot areas.
-     BEEP  Ä  Do not beep when a virus is detected.
-     SUB   Ä  Do not recurse subdirectories .
-     MEM   Ä  Skip memory scanning.
- /EICAR    Ä  Drops the virus test file.
- /LIST     Ä  List of viruses that ûCheck+ detects/cleans.
+     BOOT  Ã„  Do not scan boot areas.
+     BEEP  Ã„  Do not beep when a virus is detected.
+     SUB   Ã„  Do not recurse subdirectories .
+     MEM   Ã„  Skip memory scanning.
+ /EICAR    Ã„  Drops the virus test file.
+ /LIST     Ã„  List of viruses that Ã»Check+ detects/cleans.
 
   - Virus Check+ is not case sensitive and will accept and recognize
     parameters in both lower and upper cases.
@@ -317,30 +317,30 @@
      
     Greetings to :
                    
-                  þ  YeZ, $cenarios and all the guys at NetLink   
+                  Ã¾  YeZ, $cenarios and all the guys at NetLink   
 
-                  þ  Sorojax, ZeroCool, CyberJam , As3, Lubats, BitSucker
+                  Ã¾  Sorojax, ZeroCool, CyberJam , As3, Lubats, BitSucker
                      ,Frank and all the BROWSERS (4TH yr. notorious 
                      COMPUTER ENG'G of WMSU) of generation 2000.
                      
-                  þ  Zoom23 
+                  Ã¾  Zoom23 
                      PVW webring http://members.xoom./Zoom23/
 
-                  þ  PsK 
+                  Ã¾  PsK 
                      HEXFILES http://www.geocities.com/Tokyo/Shrine/2073/
                   
-                  þ  Engr. Proculo Francisco
+                  Ã¾  Engr. Proculo Francisco
 
       Thanx to: 
              
-                  þ  Surfnet Company
+                  Ã¾  Surfnet Company
 
-                  þ  Ronnie Pineda
+                  Ã¾  Ronnie Pineda
                      Philippine AntiVirus WebSite 
                      http://members.tripod.com/phil_av
                      phil_av@yahoo.com
 
-                  þ  As3, Frank for distributing VCheck+ 
+                  Ã¾  As3, Frank for distributing VCheck+ 
                      CyberJam for the monitor :)
 
 
