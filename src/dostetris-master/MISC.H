@@ -70,8 +70,8 @@
 #define  PLATE_AREA PLATE_WID*PLATE_HT
 #define  MASKBYTE   0
 #define  BITMAPS    23
-#define  SCOREFILE  "HISCORES.DAT"
-#define  FILELIST   "FILES.LST"
+#define  SCOREFILE  "DATA\\HISCORES.DAT"
+#define  FILELIST   "DATA\\FILES.LST"
 
 /***************************
    DEFAULT COORDINATES
