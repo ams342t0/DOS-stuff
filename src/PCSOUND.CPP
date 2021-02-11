@@ -26,8 +26,6 @@ Referenced from:
 #define PITFREQ 0x1234DD
 
 char  portval;
-char  far *v=(char far*)farmalloc(64000);
-long  n;
 
 void playtone()
 {
@@ -40,12 +38,12 @@ void playtone()
         }
 
         while (!kbhit())
-        {
+		{
                 _asm {
                         mov dx, SPKPORT
                         mov al, portval
                         xor al, 2
-                        out dx, al
+						out dx, al
                 }
 		delay(5);
 		_asm {
@@ -65,7 +63,7 @@ void sound_on(unsigned int freq)
 	unsigned int counter;
 
         counter = PITFREQ/freq;
-        _asm {
+		_asm {
                 mov dx, PITCTRL
                 mov al, 0b6h
                 out dx, al
@@ -85,11 +83,11 @@ void sound_on(unsigned int freq)
 void sound_off()
 {
         _asm {
-                mov dx, SPKPORT
+				mov dx, SPKPORT
                 in  al, dx
                 and al, 0fch
                 out dx, al
-        }
+		}
 }
 
 
@@ -100,7 +98,7 @@ void onelinemusic()
 
 	_asm {
 				mov dx, PITCTRL
-				mov al, 90h
+				mov al, 4ah
 				out dx, al
 				mov dx, SPKPORT
 				in  al, dx
@@ -110,13 +108,12 @@ void onelinemusic()
 		 }
 
 	k = 0;
+
 	while (!k)
 	{
-		t=v[i];
+		t=((i&4096)?((i*(i^i%255)|(i>>4))>>1):(i>>3)|((i&8192)?i<<2:t));
+
 		i++;
-		if (i==n) i = 0;
-
-
 		_asm {
 			mov dx, PITCHN2
 			mov al, t
@@ -143,91 +140,51 @@ void onelinemusic()
 		}
 	}
 	_asm    {
-		popa
+		sti
 	}
 }
 
-#define NOTES  13
 #define C      261
-#define Cs     277
 #define D      293
-#define Ds     311
 #define E      329
 #define F      349
-#define Fs     370
 #define G      392
-#define Gs     415
 #define A      440
-#define As     466
 #define B      494
 #define C2     523
+#define D2     587
+#define E2     659
+#define F2     698
+#define G2     784
+#define A2     880
+#define NOTES  13
 
-int main(int argc,char**argv)
+int main()
 {
-	FILE*fp;
-	char buffer[64];
-	long cn;
-	char far*pv=v;
+	int tones[]={C,D,E,F,G,A,B,C2,D2,E2,F2,G2,A2};
 
-	if (argc < 3) return 1;
-
-	fp=fopen(argv[1],"rb");
-
-	if (argv[2][0] == 'w')
-	{
-		printf("\nWave file");
-		fseek(fp,40,SEEK_SET);
-		fread(&n,4,1,fp);
-		printf("\nLength %lu",n);
-	}
-	else
-	{
-		printf("\nRaw file.");
-		fseek(fp,0,SEEK_END);
-		n = ftell(fp);
-		fseek(fp,0,SEEK_SET);
-	}
-
-	if (n > 65536) n = 65536;
-
-	printf("\nSize %lu",n);
-	cn = n;
-	while(cn>=64)
-	{
-		fread(buffer,64,1,fp);
-		_fmemcpy(pv,buffer,64);
-		cn -=64;
-		pv+=64;
-	}
-
-	if (cn)
-	{
-		fread(buffer,cn,1,fp);
-		_fmemcpy(pv,buffer,cn);
-	}
-
-	fclose(fp);
-
-	int tones[]={C,Cs,D,Ds,E,F,Fs,G,Gs,A,As,B,C2};
-
-/*	printf("\nMonotone output\n");
+	char notes[]={
+	0,0,0,3,3,4,4,7,5,3,3,5,3,1,6,4,2,3,3,4,
+	5,5,5,6,5,5,4,4,5,6,6,6,7,6,5,7,7,7,5,3,5,3,
+	0,0,0,2,4,6,4,2,4,3,2,1,2,2,2,1,2,4,4,
+	0,0,0,2,4,6,4,2,4,3,2,1,3,3,3,2,3,4,4,
+	4,4,4,4,5,6,4,5,4,3,3,3,5,4,3,3,2,7,
+	7,7,7,5,3,4,7,7,7,7,5,3,4,0,3,4,
+	5,6,7,8,4,8,7,7,5,6,4,3
+	};
+			/*
+	printf("\nMonotone sound.");
 	playtone();
 
-	printf("\nFrequency tone output.\n");
-
-	int i=0;
-
-	while (!kbhit() && i<NOTES)
+	for(int i=0;i<sizeof(notes);++i)
 	{
-		sound_on(tones[i]);
-		delay(300);
-		i++;
+		sound_on(tones[notes[i]]);
+		delay(5);
 	}
-	*/
-
+	sound_off();
+			  */
 	printf("\nMusical one-line C code.");
 	onelinemusic();
 
-	farfree(v);
 	return 1;
 }
