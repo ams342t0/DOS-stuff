@@ -1,2 +1,2 @@
 # dos-programs
-old programs compiled in turbo c/pascal. lost most of all source code. will run in dosbox.
+Old binary C and Pascal stuff and some old and new source code for playing around in DOSBox or similar environment.
